@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get(`/`, function (req, res) {
 	res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-	res.status(200).json({msg: `It's a GET request.`});
+	res.status(200).json({msg: `Oi galerinha do canal`});
 });
 
 router.post(`/`, function (req, res) {
