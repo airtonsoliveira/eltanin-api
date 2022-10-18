@@ -1,0 +1,10 @@
+{
+    "users": [
+        {
+            "name": "Airton de Souza Oliveira",
+            "email": "ton020500@gmail.com",
+            "password": "exemplo",
+            "logged": false
+        }
+    ]
+}
