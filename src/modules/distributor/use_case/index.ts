@@ -1,4 +1,4 @@
-import { distributorRepo } from '../model/index'
+import { distributorRepo } from '../model'
 
 import GetDistributorUseCase from './GetDistributorUseCase'
 import GetDistributorByIdUseCase from './GetDistributorByIdUseCase'

@@ -1,4 +1,4 @@
-import { userRepo } from '../model/index'
+import { userRepo } from '../model'
 
 import GetUserUseCase from './GetUserUseCase'
 import GetUserByIdUseCase from './GetUserByIdUseCase'

@@ -1,4 +1,4 @@
-import { critiqueRepo } from '../model/index'
+import { critiqueRepo } from '../model'
 
 import GetCritiqueUseCase from './GetCritiqueUseCase'
 import GetCritiqueByIdUseCase from './GetCritiqueByIdUseCase'

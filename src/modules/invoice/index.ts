@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 const router = Router({mergeParams: true});
 
-import invoiceRouter from './router/index'
+import invoiceRouter from './router'
 
 router.use('/invoice', invoiceRouter);
 

@@ -1,7 +1,7 @@
 import {
     getCritiqueUseCase,
     getCritiqueByIdUseCase
-} from '../use_case/index'
+} from '../use_case'
 
 import GetCritiqueController from "./GetCritiqueController";
 import GetCritiqueByIdController from "./GetCritiqueByIdController";

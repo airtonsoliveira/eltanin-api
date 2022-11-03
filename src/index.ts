@@ -1,7 +1,7 @@
 // importing packages
 import express from 'express'
 import bodyParser from 'body-parser'
-import router from './modules/index'
+import router from './modules'
 
 const app = express();
 

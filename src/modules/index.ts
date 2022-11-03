@@ -1,10 +1,10 @@
 import { Router } from 'express'
 
-import critique from './critique/index'
-import distributor from './distributor/index'
-import invoice from './invoice/index'
-import unit from './unit/index'
-import user from './user/index'
+import critique from './critique'
+import distributor from './distributor'
+import invoice from './invoice'
+import unit from './unit'
+import user from './user'
 
 const router = Router({mergeParams: true})
 

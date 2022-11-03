@@ -1,7 +1,7 @@
 import {
     getDistributorUseCase,
     getDistributorByIdUseCase
-} from '../use_case/index'
+} from '../use_case'
 
 import GetDistributorController from "./GetDistributorController";
 import GetDistributorByIdController from "./GetDistributorByIdController";

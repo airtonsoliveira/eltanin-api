@@ -1,7 +1,7 @@
 import {
     getInvoiceUseCase,
     getInvoiceByIdUseCase
-} from '../use_case/index'
+} from '../use_case'
 
 import GetInvoiceController from "./GetInvoiceController";
 import GetInvoiceByIdController from "./GetInvoiceByIdController";

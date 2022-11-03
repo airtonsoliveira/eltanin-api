@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 const router = Router({mergeParams: true});
 
-import distributorRouter from './router/index'
+import distributorRouter from './router'
 
 router.use('/distributor', distributorRouter);
 

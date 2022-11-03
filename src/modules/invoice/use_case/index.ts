@@ -1,4 +1,4 @@
-import { invoiceRepo } from '../model/index'
+import { invoiceRepo } from '../model'
 
 import GetInvoiceUseCase from './GetInvoiceUseCase'
 import GetInvoiceByIdUseCase from './GetInvoiceByIdUseCase'

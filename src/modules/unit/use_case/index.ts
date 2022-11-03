@@ -1,4 +1,4 @@
-import { unitRepo } from '../model/index'
+import { unitRepo } from '../model'
 
 import GetUnitUseCase from './GetUnitUseCase'
 import GetUnitByIdUseCase from './GetUnitByIdUseCase'

@@ -1,7 +1,7 @@
 import {
     getUnitUseCase,
     getUnitByIdUseCase
-} from '../use_case/index'
+} from '../use_case'
 
 import GetUnitController from "./GetUnitController";
 import GetUnitByIdController from "./GetUnitByIdController";
