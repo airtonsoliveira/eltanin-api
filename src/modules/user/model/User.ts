@@ -1,10 +1,10 @@
-import { Result } from '../../../shared/Result'
+import { Result } from '@shared/Result'
 
 interface UserProps {
     name: string,
     cpf?: string,
     cnpj?: string,
-    tx_email: string
+    email: string
 }
 
 export class User {
@@ -53,11 +53,11 @@ export class User {
         this.props.cnpj = cnpj
     }
 
-    get tx_email(): string {
-        return this.props.tx_email
+    get email(): string {
+        return this.props.email
     }
 
-    set tx_email(tx_email: string) {
-        this.props.tx_email = tx_email
+    set email(email: string) {
+        this.props.email = email
     }
 }

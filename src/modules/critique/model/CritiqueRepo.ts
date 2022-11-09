@@ -1,7 +1,7 @@
-import { Result } from "../../../shared/Result";
-import { IDbContext } from "../../../shared/database/DbContext";
+import { Result } from "@shared/Result";
+import { IDbContext } from "@shared/database/DbContext";
 import { Critique } from "../model/Critique";
-import { Repo } from "../../../shared/Repo";
+import { Repo } from "@shared/Repo";
 
 interface ICritiqueRepo extends Repo<Critique> {}
 
@@ -19,7 +19,7 @@ export class CritiqueRepo implements ICritiqueRepo {
 
         const result = await this.dbContext.query(query, [id])
 
-        return result?.lenght > 0
+        return result?.length > 0
     }
 
     async getAll() {

@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { getUserByIdController } from '../controller';
-import controllerHandler from '../../../shared/middleware/controllerHandler'
+import controllerHandler from '@shared/middleware/controllerHandler'
 
 const getUserByIdRouter = Router({mergeParams: true});
 

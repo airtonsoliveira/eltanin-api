@@ -1,11 +1,11 @@
 import { InvoiceRepo } from '../model/InvoiceRepo'
-import { UseCase } from "../../../shared/UseCase";
+import { UseCase } from "@shared/UseCase";
 
 export default class GetInvoiceByIdUseCase implements UseCase<any, any> {
     constructor(private invoiceRepo: InvoiceRepo) {}
 
     async execute (idInvoice: string): Promise<any> {
-        const result = await this.invoiceRepo.getById(idInvoice)
+        const result = await this.invoiceRepo.getById(idInvoice, '1')
 
         return result.map((invoice: any) => {
             return {

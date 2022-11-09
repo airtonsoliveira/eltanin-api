@@ -1,4 +1,4 @@
-import { Result } from '../../../shared/Result'
+import { Result } from '@shared/Result'
 
 interface DistributorProps {
     name: string

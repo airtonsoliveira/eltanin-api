@@ -1,11 +1,11 @@
 import { UnitRepo } from '../model/UnitRepo'
 import { UseCase } from "@shared/UseCase";
 
-export default class GetUnitByIdUseCase implements UseCase<any, any> {
+export default class GetUnitByFilterUseCase implements UseCase<any, any> {
     constructor(private unitRepo: UnitRepo) {}
 
     async execute (idUnit: string): Promise<any> {
-        const result = await this.unitRepo.getById(idUnit, '1')
+        const result = await this.unitRepo.getByFilter(idUnit)
 
         return result.map((unit: any) => {
             return {

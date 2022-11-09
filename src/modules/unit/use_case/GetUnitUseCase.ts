@@ -1,11 +1,11 @@
 import { UnitRepo } from '../model/UnitRepo'
-import { UseCase } from "../../../shared/UseCase";
+import { UseCase } from "@shared/UseCase";
 
 export default class GetUnitUseCase implements UseCase<any, any> {
     constructor(private unitRepo: UnitRepo) {}
 
     async execute (): Promise<any> {
-        const result = await this.unitRepo.getAll()
+        const result = await this.unitRepo.getAll('1')
 
         return result.map((unit: any) => {
             return {

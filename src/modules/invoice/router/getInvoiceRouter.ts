@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { getInvoiceController } from '../controller';
-import controllerHandler from '../../../shared/middleware/controllerHandler'
+import controllerHandler from '@shared/middleware/controllerHandler'
 
 const getInvoiceRouter = Router({mergeParams: true});
 

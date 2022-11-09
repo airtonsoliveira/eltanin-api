@@ -1,8 +1,8 @@
 import { Pool } from 'pg'
 
 interface IDbContext {
-    getConnection (): Promise<any>
-    query (stmt: string, params?: any): Promise<any>
+    getConnection(): Promise<any>
+    query(stmt: string, params?: any): Promise<any>
 }
 
 class DbContext implements IDbContext {

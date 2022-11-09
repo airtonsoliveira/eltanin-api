@@ -1,5 +1,5 @@
 import { UserRepo } from '../model/UserRepo'
-import { UseCase } from "../../../shared/UseCase";
+import { UseCase } from "@shared/UseCase";
 
 export default class GetUserUseCase implements UseCase<any, any> {
     constructor(private userRepo: UserRepo) {}

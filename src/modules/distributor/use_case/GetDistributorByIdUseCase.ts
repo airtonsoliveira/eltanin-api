@@ -1,5 +1,5 @@
 import { DistributorRepo } from '../model/DistributorRepo'
-import { UseCase } from "../../../shared/UseCase";
+import { UseCase } from "@shared/UseCase";
 
 export default class GetDistributorByIdUseCase implements UseCase<any, any> {
     constructor(private distributorRepo: DistributorRepo) {}

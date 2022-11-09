@@ -1,5 +1,5 @@
 import { CritiqueRepo } from '../model/CritiqueRepo'
-import { UseCase } from "../../../shared/UseCase";
+import { UseCase } from "@shared/UseCase";
 
 export default class GetCritiqueUseCase implements UseCase<any, any> {
     constructor(private critiqueRepo: CritiqueRepo) {}

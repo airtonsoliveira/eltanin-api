@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { getCritiqueController } from '../controller';
-import controllerHandler from '../../../shared/middleware/controllerHandler'
+import controllerHandler from '@shared/middleware/controllerHandler'
 
 const getCritiqueRouter = Router({mergeParams: true});
 

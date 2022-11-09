@@ -1,7 +1,7 @@
-import { Result } from "../../../shared/Result";
-import { IDbContext } from "../../../shared/database/DbContext";
+import { Result } from "@shared/Result";
+import { IDbContext } from "@shared/database/DbContext";
 import { Invoice } from "../model/Invoice";
-import { Repo } from "../../../shared/Repo";
+import { Repo } from "@shared/Repo";
 
 interface IInvoiceRepo extends Repo<Invoice> {}
 
@@ -19,21 +19,21 @@ export class InvoiceRepo implements IInvoiceRepo {
 
         const result = await this.dbContext.query(query, [id])
 
-        return result?.lenght > 0
+        return result?.length > 0
     }
 
-    async getAll() {
-        const query = 'SELECT * FROM eltanin.fatura ORDER BY id_fatura'
+    async getAll(idUser: string) {
+        const query = 'SELECT * FROM eltanin.fatura WHERE id_usuario = $1 ORDER BY id_fatura'
 
-        const result = await this.dbContext.query(query)
+        const result = await this.dbContext.query(query, [idUser])
 
         return result
     }
 
-    async getById(id: string) {
-        const query = 'SELECT * FROM eltanin.fatura WHERE id_fatura = $1'
+    async getById(id: string, idUser: string) {
+        const query = 'SELECT * FROM eltanin.fatura WHERE id_fatura = $1 AND id_usuario = $2'
 
-        const result = await this.dbContext.query(query, [id])
+        const result = await this.dbContext.query(query, [id, idUser])
 
         return result
     }

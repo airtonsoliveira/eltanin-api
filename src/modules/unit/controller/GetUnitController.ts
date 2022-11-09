@@ -1,5 +1,5 @@
-import Controller from '../../../shared/Controller';
-import { UseCase } from '../../../shared/UseCase';
+import Controller from '@shared/Controller';
+import { UseCase } from '@shared/UseCase';
 
 export default class GetUnitController extends Controller {
     private useCase: UseCase<any, any>
