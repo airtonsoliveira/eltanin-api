@@ -14,7 +14,8 @@ export default class PostUserController extends Controller {
             nome: this.requiredParam(req.body.name),
             nu_cpf: this.optionalParam(req.body.cpf),
             nu_cnpj: this.optionalParam(req.body.cnpj),
-            tx_email: this.requiredParam(req.body.email)
+            tx_email: this.requiredParam(req.body.email),
+            tx_senha: this.requiredParam(req.body.password)
         }
 
         const response: any = await this.useCase.execute(dto)

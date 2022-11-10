@@ -1,5 +1,4 @@
 import { User } from "./User";
-import { Result } from "@shared/Result";
 
 export class UserMapper {
 
@@ -8,7 +7,8 @@ export class UserMapper {
             user.name,
             user.cpf,
             user.cnpj,
-            user.email
+            user.email,
+            user.password
         ]
     }
 
@@ -25,7 +25,8 @@ export class UserMapper {
             name: data.nome,
             cpf: data.nu_cpf,
             cnpj: data.nu_cnpj,
-            email: data.tx_email
+            email: data.tx_email,
+            password: data.tx_senha
         },
             data.id_usuario)
     }

@@ -12,29 +12,29 @@ export default class SignService {
 
         const findByEmailQuery = `SELECT * from eltanin.usuario u WHERE u.tx_email = $1`
         const result = await this._dbContext.query(findByEmailQuery, [user])
-        if(!(result?.length > 0)) return 401
+        if (!(result?.length > 0)) throw new Error('User not found')
 
         const resp = result[0]
 
-        if(resp.tx_salt) {
+        if (resp.tx_salt) {
             let key
-            try{
+            try {
                 key = crypto.pbkdf2Sync(pass, resp.tx_salt, 100000, 32, 'sha256')
             } catch (err: any) {
                 throw new Error('Could not authenticate')
             }
 
-            if(resp.tx_senha !== key.toString('hex')) {
+            if (resp.tx_senha !== key.toString('hex')) {
                 throw new Error('Invalid credentials')
             }
         } else {
-            if(resp.tx_senha !== pass) {
+            if (resp.tx_senha !== pass) {
                 throw new Error('Invalid credentials')
             }
 
             let salt = randomstring.generate(16)
             let key
-            try{
+            try {
                 key = crypto.pbkdf2Sync(pass, salt, 100000, 32, 'sha256')
             } catch (err: any) {
                 throw new Error('Could not authenticate')
@@ -45,15 +45,15 @@ export default class SignService {
         }
 
         let newToken
-        try{
-            newToken = jwt.sign({ user: user }, 'secret', { expiresIn: 24*60*60 })
+        try {
+            newToken = jwt.sign({ user: user }, 'secret', { expiresIn: 24 * 60 * 60 })
         } catch (err: any) {
             throw new Error('Could not authenticate')
         }
 
         const updateTokenQuery = `UPDATE eltanin.usuario SET cd_token = $1 WHERE id_usuario = $2`
         await this._dbContext.query(updateTokenQuery, [newToken, resp.id_usuario])
- 
-        return {name: resp.nome, idUser: resp.id_usuario, token: newToken}
+
+        return { name: resp.nome, idUser: resp.id_usuario, token: newToken }
     }
 }

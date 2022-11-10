@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-const router = Router({mergeParams: true});
+const router = Router({ mergeParams: true });
 
 import sign from './signRouter'
 import signCheck from './signCheckRouter'

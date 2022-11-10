@@ -56,7 +56,7 @@ export class UserRepo implements IUserRepo {
         } else {
             const params = UserMapper.toInsert(user)
 
-            const query = `INSERT INTO eltanin.usuario (nome, nu_cpf, nu_cnpj, tx_email) VALUES ($1, $2, $3, $4)`
+            const query = `INSERT INTO eltanin.usuario (nome, nu_cpf, nu_cnpj, tx_email, tx_senha) VALUES ($1, $2, $3, $4, $5)`
 
             const result = await this.dbContext.query(query, params)
 

@@ -16,6 +16,6 @@ export default class SignController extends Controller {
         }
 
         const response: any = await this.useCase.execute(dto)
-        return this.ok(response)
+        return response.isSuccess ? this.ok(response.getValue()) : this.forbidden(response.errorValue())
     }
 }

@@ -4,7 +4,7 @@ import { UseCase } from "@shared/UseCase";
 import { Result } from '@shared/Result';
 
 export default class PostUserUseCase implements UseCase<any, any> {
-    constructor(private signService: SignService) {}
+    constructor(private signService: SignService) { }
 
     async execute(params: any): Promise<any> {
         try {

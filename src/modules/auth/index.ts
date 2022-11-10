@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-const router = Router({mergeParams: true});
+const router = Router({ mergeParams: true });
 
 import authRouter from './router'
 

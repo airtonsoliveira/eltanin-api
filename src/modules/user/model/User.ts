@@ -4,7 +4,8 @@ interface UserProps {
     name: string,
     cpf?: string,
     cnpj?: string,
-    email: string
+    email: string,
+    password?: string
 }
 
 export class User {
@@ -59,5 +60,13 @@ export class User {
 
     set email(email: string) {
         this.props.email = email
+    }
+
+    get password(): string {
+        return this.props.password
+    }
+
+    set password(password: string) {
+        this.props.password = password
     }
 }

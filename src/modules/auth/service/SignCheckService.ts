@@ -4,9 +4,9 @@ export default class SignCheckService {
     async execute(token: string): Promise<any> {
         try {
             jwt.verify(token, 'secret')
-            return 200
+            return { token: token }
         } catch (err: any) {
-            return 401
+            throw new Error('Invalid token')
         }
     }
 }
