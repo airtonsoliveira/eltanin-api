@@ -44,11 +44,11 @@ export class UserRepo implements IUserRepo {
         const exists = await this.exists(user)
         
         if(exists || user.id !== '0') {
-            const params = UserMapper.toInsert(user)
+            const params = UserMapper.toUpdate(user)
 
-            const query =  `UPDATE eltanin.usuario 
-                            SET nome = $1, nu_cpf = $2, nu_cnpj = $3, tx_email = $4
-                            WHERE id_usuario = $5`
+            const query =  `UPDATE eltanin.usuario
+                            SET nome = $1, nu_cpf = $2, nu_cnpj = $3
+                            WHERE id_usuario = $4`
 
             const result = await this.dbContext.query(query, [...params, user.id])
 

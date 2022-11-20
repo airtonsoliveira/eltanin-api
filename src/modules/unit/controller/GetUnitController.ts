@@ -10,7 +10,8 @@ export default class GetUnitController extends Controller {
     }
 
     public async executeImpl(req: any): Promise<any> {
-        const response: any = await this.useCase.execute()
+        const idUser = req.headers.iduser
+        const response: any = await this.useCase.execute(idUser)
         return this.ok(response)
     }
 }

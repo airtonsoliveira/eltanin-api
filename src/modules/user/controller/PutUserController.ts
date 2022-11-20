@@ -11,7 +11,7 @@ export default class PutUserController extends Controller {
 
     public async executeImpl(req: any): Promise<any> {
         const dto = {
-            id_usuario: this.requiredParam(req.body.id),
+            id_usuario: this.requiredParam(req.headers.iduser),
             nome: this.requiredParam(req.body.name),
             nu_cpf: this.optionalParam(req.body.cpf),
             nu_cnpj: this.optionalParam(req.body.cnpj),

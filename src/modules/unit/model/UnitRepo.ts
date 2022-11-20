@@ -24,7 +24,7 @@ export class UnitRepo implements IUnitRepo {
     }
 
     async getAll(idUser: string) {
-        const query = 'SELECT * FROM eltanin.unidade WHERE id_usuario = $1 ORDER BY name'
+        const query = 'SELECT * FROM eltanin.unidade WHERE id_usuario = $1 ORDER BY nome'
 
         const result = await this.dbContext.query(query, [idUser])
 
