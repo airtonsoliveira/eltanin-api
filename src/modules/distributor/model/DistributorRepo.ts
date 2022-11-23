@@ -15,7 +15,7 @@ export class DistributorRepo implements IDistributorRepo {
     async exists(distributor: Distributor) {
         const id = distributor.id
 
-        const query = 'SELECT id_critica FROM eltanin.critica WHERE id_critica = $1'
+        const query = `SELECT id_distribuidora FROM eltanin.distribuidora WHERE id_distribuidora = $1`
 
         const result = await this.dbContext.query(query, [id])
 
@@ -23,7 +23,7 @@ export class DistributorRepo implements IDistributorRepo {
     }
 
     async getAll() {
-        const query = 'SELECT * FROM eltanin.critica ORDER BY id_critica'
+        const query = `SELECT * FROM eltanin.distribuidora ORDER BY nome`
 
         const result = await this.dbContext.query(query)
 
@@ -31,7 +31,7 @@ export class DistributorRepo implements IDistributorRepo {
     }
 
     async getById(id: string) {
-        const query = 'SELECT * FROM eltanin.critica WHERE id_critica = $1'
+        const query = `SELECT * FROM eltanin.distribuidora WHERE id_distribuidora = $1`
 
         const result = await this.dbContext.query(query, [id])
 
