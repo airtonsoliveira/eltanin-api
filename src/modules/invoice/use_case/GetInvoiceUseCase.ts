@@ -4,12 +4,12 @@ import { UseCase } from "@shared/UseCase";
 export default class GetInvoiceUseCase implements UseCase<any, any> {
     constructor(private invoiceRepo: InvoiceRepo) {}
 
-    async execute (): Promise<any> {
-        const result = await this.invoiceRepo.getAll('1')
+    async execute (idUser: string): Promise<any> {
+        const result = await this.invoiceRepo.getAll(idUser)
 
         return result.map((invoice: any) => {
             return {
-                id: invoice.id_usuario,
+                id: invoice.id_fatura,
                 referenceMonth: invoice.nu_mes_referencia,
                 dueDate: invoice.dt_vencimento,
                 issueDate: invoice.dt_emissao,
@@ -17,8 +17,27 @@ export default class GetInvoiceUseCase implements UseCase<any, any> {
                 storedFile: invoice.tx_arquivo_armazenado,
                 userId: invoice.id_usuario,
                 distributorId: invoice.id_distribuidora,
-                unitId: invoice.id_unidade
+                unitId: invoice.id_unidade,
+                itensList: invoice.itens_fatura,
+                injected: this.getInjectedTotal(invoice.itens_fatura),
+                consumed: this.getConsumedTotal(invoice.itens_fatura)
             }
         })
+    }
+
+    getInjectedTotal(itens_fatura: any) {
+        let injected = 0
+        itens_fatura.forEach((item: any) => {
+            if([37, 38].includes(item.id_tipo_item_fatura)) injected += parseFloat(item.valor.replace('.', '').replace(',', '.'))
+        })
+        return parseFloat(injected.toFixed(2))
+    }
+
+    getConsumedTotal(itens_fatura: any) {
+        let consumed = 0
+        itens_fatura.forEach((item: any) => {
+            if([21, 87].includes(item.id_tipo_item_fatura)) consumed += parseFloat(item.valor.replace('.', '').replace(',', '.'))
+        })
+        return parseFloat(consumed.toFixed(2))
     }
 }

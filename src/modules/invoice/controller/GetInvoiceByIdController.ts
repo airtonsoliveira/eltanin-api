@@ -10,8 +10,11 @@ export default class GetInvoiceByIdController extends Controller {
     }
 
     public async executeImpl(req: any): Promise<any> {
-        const idInvoice = req.params.id
-        const response: any = await this.useCase.execute(idInvoice)
+        const dto = {
+            idUser: req.headers.iduser,
+            idInvoice: req.params.id
+        }
+        const response: any = await this.useCase.execute(dto)
         return this.ok(response)
     }
 }
