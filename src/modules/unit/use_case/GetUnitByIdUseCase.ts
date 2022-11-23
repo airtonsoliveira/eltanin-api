@@ -4,8 +4,8 @@ import { UseCase } from "@shared/UseCase";
 export default class GetUnitByIdUseCase implements UseCase<any, any> {
     constructor(private unitRepo: UnitRepo) {}
 
-    async execute (idUnit: string): Promise<any> {
-        const result = await this.unitRepo.getById(idUnit, '1')
+    async execute (req: { idUnit: string, idUser: string }): Promise<any> {
+        const result = await this.unitRepo.getById(req.idUnit, req.idUser)
 
         return result.map((unit: any) => {
             return {
