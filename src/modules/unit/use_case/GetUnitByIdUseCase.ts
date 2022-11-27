@@ -18,7 +18,13 @@ export default class GetUnitByIdUseCase implements UseCase<any, any> {
                 complement: unit.tx_complemento,
                 userId: unit.id_usuario,
                 credits: unit.nu_creditos,
-                code: unit.cd_instalacao
+                code: unit.cd_instalacao,
+                apportionment: unit.rateio?.map((item: any) => {
+                    return {
+                        consumerUnit: item.id_unidade_consumidora,
+                        percentual: item.porcentagem,
+                    }
+                }),
             }
         })
     }

@@ -39,7 +39,8 @@ export class UnitMapper {
             complement: data.tx_complemento,
             userId: data.id_usuario,
             credits: data.nu_creditos,
-            code: data.cd_instalacao
+            code: data.cd_instalacao,
+            apportionment: data.rateio
         },
             data.id_unidade)
     }

@@ -9,7 +9,8 @@ interface UnitProps {
     complement?: string,
     userId: string,
     credits?: string,
-    code: string
+    code: string,
+    apportionment?: any[]
 }
 
 export class Unit {
@@ -104,5 +105,13 @@ export class Unit {
 
     set code(code: string) {
         this.props.code = code
+    }
+
+    get apportionment(): any[] {
+        return this.props.apportionment
+    }
+
+    set apportionment(apportionment: any[]) {
+        this.props.apportionment = apportionment
     }
 }

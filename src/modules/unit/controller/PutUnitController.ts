@@ -19,7 +19,8 @@ export default class PostUnitController extends Controller {
             tx_bairro: this.optionalParam(req.body.neighborhood),
             tx_complemento: this.optionalParam(req.body.complement),
             nu_creditos: this.optionalParam(req.body.credits),
-            cd_instalacao: this.requiredParam(req.body.code)
+            cd_instalacao: this.requiredParam(req.body.code),
+            rateio: this.optionalParam(req.body.apportionment)
         }
         
         const response: any = await this.useCase.execute(dto)

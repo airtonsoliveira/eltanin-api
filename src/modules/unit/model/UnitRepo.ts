@@ -25,17 +25,45 @@ export class UnitRepo implements IUnitRepo {
     }
 
     async getAll(idUser: string) {
-        const query = `SELECT * FROM eltanin.unidade WHERE id_usuario = $1 ORDER BY nome`
+        const unitQuery = `SELECT * FROM eltanin.unidade WHERE id_usuario = $1 ORDER BY nome`
 
-        const result = await this.dbContext.query(query, [idUser])
+        const unitResult = await this.dbContext.query(unitQuery, [idUser])
+
+        const apportionmentQuery =
+            `SELECT r.* FROM eltanin.unidade u
+            LEFT JOIN eltanin.rateio r ON u.id_unidade = r.id_unidade_geradora
+            WHERE u.id_usuario = $1 ORDER BY u.nome`
+        
+        const apportionmentResult = await this.dbContext.query(apportionmentQuery, [idUser])
+
+        const result = unitResult.map((unit: any) => {
+            return {
+                ...unit,
+                rateio: apportionmentResult.filter((item: any) => { return unit.id_unidade === item.id_unidade_geradora })
+            }
+        })
 
         return result
     }
 
     async getById(id: string, idUser: string) {
-        const query = `SELECT * FROM eltanin.unidade WHERE id_unidade = $1 AND id_usuario = $2`
+        const unitQuery = `SELECT * FROM eltanin.unidade WHERE id_unidade = $1 AND id_usuario = $2 ORDER BY nome`
 
-        const result = await this.dbContext.query(query, [id, idUser])
+        const unitResult = await this.dbContext.query(unitQuery, [id, idUser])
+
+        const apportionmentQuery =
+            `SELECT r.* FROM eltanin.unidade u
+            LEFT JOIN eltanin.rateio r ON u.id_unidade = r.id_unidade_geradora
+            WHERE u.id_unidade = $1 AND u.id_usuario = $2 ORDER BY u.nome`
+        
+        const apportionmentResult = await this.dbContext.query(apportionmentQuery, [id, idUser])
+
+        const result = unitResult.map((unit: any) => {
+            return {
+                ...unit,
+                rateio: apportionmentResult.filter((item: any) => { return unit.id_unidade === item.id_unidade_geradora })
+            }
+        })
 
         return result
     }
@@ -72,6 +100,8 @@ export class UnitRepo implements IUnitRepo {
 
             const result = await this.dbContext.query(query, [...params, unit.id])
 
+            if(unit.apportionment) this.saveApportionments(unit.apportionment, unit.id)
+
             return result
         } else {
             const params = UnitMapper.toInsert(unit)
@@ -91,10 +121,36 @@ export class UnitRepo implements IUnitRepo {
 
             const result = await this.dbContext.query(query, params)
 
-            console.log(params)
+            if(unit.apportionment) this.saveApportionments(unit.apportionment)
 
             return result
         }
+    }
+
+    async saveApportionments(apportionment: any[] , unitId?: string) {
+        let lastUnitId
+        if(unitId) {
+            lastUnitId = unitId
+        } else {
+            const queryLastUnit = `SELECT id_unidade FROM eltanin.unidade ORDER BY id_unidade DESC LIMIT 1`
+            const result = await this.dbContext.query(queryLastUnit)
+            lastUnitId = result[0]?.id_unidade
+        }
+
+        let queryDelete = `DELETE FROM eltanin.rateio WHERE id_unidade_geradora = $1`
+        await this.dbContext.query(queryDelete, [lastUnitId])
+
+        let queryInsert = `INSERT INTO eltanin.rateio (porcentagem, id_unidade_consumidora, id_unidade_geradora) VALUES `
+        const argsInsert: any[] = []
+        let counterInsert = 2
+
+        apportionment.forEach((item: any) => {
+            argsInsert.push(item.percentual, item.consumerUnit)
+            queryInsert += ` ($${counterInsert}, $${counterInsert+1}, $1),`
+            counterInsert += 2
+        })
+        queryInsert = queryInsert.slice(0, -1)
+        await this.dbContext.query(queryInsert, [lastUnitId, ...argsInsert])
     }
 
     private optionalFilter(append: string, param: any, args?: any[]) {
