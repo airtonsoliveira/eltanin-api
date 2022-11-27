@@ -8,7 +8,9 @@ interface InvoiceProps {
     storedFile?: string,
     userId: string,
     distributorId: string,
-    unitId: string
+    unitId: string,
+    items?: any[],
+    file?: Blob
 }
 
 export class Invoice {
@@ -95,5 +97,21 @@ export class Invoice {
 
     set unitId(unitId: string) {
         this.props.unitId = unitId
+    }
+
+    get items(): any[] {
+        return this.props.items
+    }
+
+    set items(items: any[]) {
+        this.props.items = items
+    }
+
+    get file(): Blob {
+        return this.props.file
+    }
+
+    set file(file: Blob) {
+        this.props.file = file
     }
 }

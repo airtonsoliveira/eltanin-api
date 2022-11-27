@@ -18,7 +18,13 @@ export default class GetInvoiceUseCase implements UseCase<any, any> {
                 userId: invoice.id_usuario,
                 distributorId: invoice.id_distribuidora,
                 unitId: invoice.id_unidade,
-                itensList: invoice.itens_fatura,
+                items: invoice.itens_fatura?.map((item: any) => {
+                    return {
+                        name: item.nome,
+                        type: item.id_tipo_item_fatura,
+                        value: item.valor
+                    }
+                }),
                 injected: this.getInjectedTotal(invoice.itens_fatura),
                 consumed: this.getConsumedTotal(invoice.itens_fatura)
             }
