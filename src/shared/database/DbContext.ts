@@ -7,11 +7,11 @@ interface IDbContext {
 
 class DbContext implements IDbContext {
     private pool = new Pool({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'postgres',
-        password: 'admin123',
-        port: 5432,
+        user: process.env.PGUSER || 'postgres',
+        host: process.env.PGHOST || 'localhost',
+        database: process.env.PGDATABASE || 'postgres',
+        password: process.env.PGPASSWORD || 'admin123',
+        port: Number(process.env.PGPORT) || 5432
     })
 
     async getConnection() {
