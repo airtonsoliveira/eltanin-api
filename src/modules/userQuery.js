@@ -12,7 +12,7 @@ const getUsers = (request, response) => {
         if (error) {
             throw error
         }
-        response.header("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.header("Access-Control-Allow-Origin", "https://eltanin-front.vercel.app");
         response.status(200).json(results.rows)
     })
 }
@@ -24,7 +24,7 @@ const getUserById = (request, response) => {
         if (error) {
             throw error
         }
-        response.header("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.header("Access-Control-Allow-Origin", "https://eltanin-front.vercel.app");
         response.status(200).json(results.rows)
     })
 }

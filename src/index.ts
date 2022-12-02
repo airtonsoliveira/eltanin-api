@@ -6,7 +6,7 @@ import router from './modules'
 
 const app = express();
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://eltanin-front.vercel.app',
     credentials: true,
     optionSuccessStatus: 200
 }
