@@ -67,8 +67,7 @@ export default abstract class Controller {
 
     public requiredParam(param: any) {
         if(!param) {
-            console.log('missing required param')
-            throw Error('missing required param')
+            throw Error('Faltando parâmetro obrigatório')
         }
         return param
     }
