@@ -20,10 +20,10 @@ export default class GetCritiqueEvaluateService {
         await this.dbContext.query(critiqueQuery)
 
         const aggregate = {
-            consumed: Number(this.consumed(invoice.items)),
-            injected: Number(this.injected(invoice.items)),
-            compensed: Number(this.compensed(invoice.items)),
-            credits: Number(this.credits(invoice.items)),
+            consumed: this.consumed(invoice.items),
+            injected: this.injected(invoice.items),
+            compensed: this.compensed(invoice.items),
+            credits: this.credits(invoice.items),
             previousCredits: 0
         }
 
@@ -218,52 +218,52 @@ export default class GetCritiqueEvaluateService {
     }
 
     consumed (items: any[]) {
-        const itemsConsumed = items.filter((item: any) => { [26, 21, 87, 104, 79, 80].includes(item.type) })
-
-        if (itemsConsumed.length = 0) return NaN
-
+        const itemsConsumed = items.filter((item: any) => [26, 21, 87, 104, 79, 80].includes(item.id_tipo_item_fatura))
+        
+        if (itemsConsumed.length === 0) { return NaN }
+    
         let sumConsumed = 0
         itemsConsumed.forEach((item: any) => {
-            sumConsumed += item.value
+            sumConsumed += Number(item.valor)
         })
 
         return sumConsumed
     }
 
     injected (items: any[]) {
-        const itemsInjected = items.filter((item: any) => { [27, 125, 72, 73].includes(item.type) })
+        const itemsInjected = items.filter((item: any) => [38, 37, 122].includes(item.id_tipo_item_fatura))
 
-        if (itemsInjected.length = 0) return NaN
+        if (itemsInjected.length === 0) return NaN
 
         let sumInjected = 0
         itemsInjected.forEach((item: any) => {
-            sumInjected += item.value
+            sumInjected += Number(item.valor)
         })
 
         return sumInjected
     }
 
     compensed (items: any[]) {
-        const itemsCompensed = items.filter((item: any) => { [128, 129, 89, 90, 25, 39, 120, 83, 84].includes(item.type) })
+        const itemsCompensed = items.filter((item: any) => [128, 129, 89, 90, 25, 39, 120, 83, 84].includes(item.id_tipo_item_fatura))
 
-        if (itemsCompensed.length = 0) return NaN
+        if (itemsCompensed.length === 0) return NaN
 
         let sumCompensed = 0
         itemsCompensed.forEach((item: any) => {
-            sumCompensed += item.value
+            sumCompensed += Number(item.valor)
         })
 
         return sumCompensed
     }
 
     credits (items: any[]) {
-        const itemsCredits = items.filter((item: any) => { [22, 23].includes(item.type) })
+        const itemsCredits = items.filter((item: any) => [22, 23].includes(item.id_tipo_item_fatura))
 
-        if (itemsCredits.length = 0) return NaN
+        if (itemsCredits.length === 0) return NaN
 
         let sumCredits = 0
         itemsCredits.forEach((item: any) => {
-            sumCredits += item.value
+            sumCredits += Number(item.valor)
         })
 
         return sumCredits

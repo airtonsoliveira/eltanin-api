@@ -80,7 +80,7 @@ export class UnitRepo implements IUnitRepo {
         return result
     }
 
-    async delete(unit: Unit) { }
+    async delete(id: string, idUser: string) { }
     async save(unit: Unit) {
         const exists = await this.exists(unit)
         

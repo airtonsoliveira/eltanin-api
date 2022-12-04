@@ -38,7 +38,7 @@ export class DistributorRepo implements IDistributorRepo {
         return result
     }
 
-    async delete(distributor: Distributor) {}
+    async delete(id: string, idUser: string) {}
     async save(distributor: Distributor) {}
 
 }

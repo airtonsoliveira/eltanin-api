@@ -38,7 +38,7 @@ export class CritiqueRepo implements ICritiqueRepo {
         return result
     }
 
-    async delete(critique: Critique) {}
+    async delete(id: string, idUser: string) {}
     async save(critique: Critique) {}
 
 }

@@ -69,7 +69,12 @@ export class InvoiceRepo implements IInvoiceRepo {
         return result
     }
 
-    async delete(invoice: Invoice) { }
+    async delete(id: string, idUser: string) {
+        const invoiceQuery = `DELETE FROM eltanin.fatura f WHERE f.id_fatura = $1 and f.id_usuario = $2`
+        const invoiceResult = await this.dbContext.query(invoiceQuery, [id, idUser])
+        return invoiceResult
+    }
+
     async save(invoice: Invoice) {
         const exists = await this.exists(invoice)
         

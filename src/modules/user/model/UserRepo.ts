@@ -39,7 +39,7 @@ export class UserRepo implements IUserRepo {
         return result
     }
 
-    async delete(user: User) {}
+    async delete(id: string, idUser: string) {}
     async save(user: User) {
         const exists = await this.exists(user)
         
