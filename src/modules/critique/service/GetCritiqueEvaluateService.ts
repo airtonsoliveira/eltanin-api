@@ -1,5 +1,8 @@
+import { getInvoiceByFilterService } from "@modules/invoice/service";
 import { Invoice } from "@modules/invoice/model/Invoice";
+import { InvoiceMapper } from "@modules/invoice/model/InvoiceMapper";
 import { IDbContext } from "@shared/database/DbContext";
+import util_date from "@shared/util/Date"
 
 export default class GetCritiqueEvaluateService {
     private dbContext: IDbContext
@@ -15,16 +18,20 @@ export default class GetCritiqueEvaluateService {
     }
 
     async execute(invoice: Invoice): Promise<any> {
-        const critiqueQuery = `SELECT * FROM eltanin.critica` 
+        const previousInvoiceParams: any = {
+            referenceMonth: util_date.get_anomes_from_interval(Number(invoice.referenceMonth), -1),
+            unitId: invoice.unitId
+        }
 
-        await this.dbContext.query(critiqueQuery)
+        const previousInvoiceResult = await getInvoiceByFilterService.execute(invoice.userId, previousInvoiceParams)
+        const previousInvoice = InvoiceMapper.toDomain(previousInvoiceResult[0]).getValue()
 
         const aggregate = {
             consumed: this.consumed(invoice.items),
             injected: this.injected(invoice.items),
             compensed: this.compensed(invoice.items),
             credits: this.credits(invoice.items),
-            previousCredits: 0
+            previousCredits: this.credits(previousInvoice.items)
         }
 
         const result = [

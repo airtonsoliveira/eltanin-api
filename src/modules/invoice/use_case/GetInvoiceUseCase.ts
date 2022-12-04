@@ -1,11 +1,17 @@
+import { getInvoiceByFilterService } from '../service';
 import { InvoiceRepo } from '../model/InvoiceRepo'
 import { UseCase } from "@shared/UseCase";
 
 export default class GetInvoiceUseCase implements UseCase<any, any> {
     constructor(private invoiceRepo: InvoiceRepo) {}
 
-    async execute (idUser: string): Promise<any> {
-        const result = await this.invoiceRepo.getAll(idUser)
+    async execute (params: { idUser: string, filters?: any }): Promise<any> {
+        let result
+        if (params.filters) {
+            result = await getInvoiceByFilterService.execute(params.idUser, params.filters)
+        } else {
+            result = await this.invoiceRepo.getAll(params.idUser)
+        }
 
         return result.map((invoice: any) => {
             return {

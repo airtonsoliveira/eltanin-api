@@ -65,7 +65,7 @@ export class InvoiceRepo implements IInvoiceRepo {
                 itens_fatura: itensResult.filter((item: any) => { return invoice.id_fatura === item.id_fatura })
             }
         })
-        
+
         return result
     }
 
@@ -77,7 +77,7 @@ export class InvoiceRepo implements IInvoiceRepo {
 
     async save(invoice: Invoice) {
         const exists = await this.exists(invoice)
-        
+
         if(exists || invoice.id !== '0') {
             const params = InvoiceMapper.toUpdate(invoice)
 
@@ -114,7 +114,7 @@ export class InvoiceRepo implements IInvoiceRepo {
             const result = await this.dbContext.query(query, params)
 
             if(invoice.items) this.saveItems(invoice.items)
-            
+
             return result
         }
     }

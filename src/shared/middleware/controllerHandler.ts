@@ -18,7 +18,9 @@ const controllerHandler = (controller: Controller) => {
 
         const response: ApiResponse = await controller.execute(httpRequest)
 
-        res.header("Access-Control-Allow-Origin", "https://eltanin-front.vercel.app")
+        if ('http://localhost:3000' === httpRequest.headers.origin || 'https://eltanin-front.vercel.app' === httpRequest.headers.origin){
+            res.header("Access-Control-Allow-Origin", httpRequest.headers.origin)
+        }
 
         return res.status(response.code).json({
             message: response.message,

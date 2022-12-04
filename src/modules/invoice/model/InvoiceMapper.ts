@@ -29,17 +29,17 @@ export class InvoiceMapper {
 
     static toDomain(data: any) {
         return Invoice.create({
-            referenceMonth: data.nu_mes_referencia,
-            dueDate: data.dt_vencimento,
-            issueDate: data.dt_emissao,
-            value: data.nu_valor,
-            storedFile: data.tx_arquivo_armazenado,
-            userId: data.id_usuario,
-            distributorId: data.id_distribuidora,
-            unitId: data.id_unidade,
-            items: data.itens_fatura,
-            file: data.file
+            referenceMonth: data?.nu_mes_referencia,
+            dueDate: data?.dt_vencimento,
+            issueDate: data?.dt_emissao,
+            value: data?.nu_valor,
+            storedFile: data?.tx_arquivo_armazenado,
+            userId: data?.id_usuario,
+            distributorId: data?.id_distribuidora,
+            unitId: data?.id_unidade,
+            items: data?.itens_fatura || [],
+            file: data?.file
         },
-            data.id_fatura)
+            data?.id_fatura)
     }
 }

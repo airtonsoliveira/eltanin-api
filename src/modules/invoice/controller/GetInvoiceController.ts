@@ -10,8 +10,20 @@ export default class GetInvoiceController extends Controller {
     }
 
     public async executeImpl(req: any): Promise<any> {
-        const idUser = req.headers.iduser
-        const response: any = await this.useCase.execute(idUser)
+        let response: any
+        let dto: any = {
+            idUser: req.headers.iduser
+        }
+
+        if (Object.keys(req.query).length > 0) {
+            dto['filters'] = {
+                referenceMonth: req.query.referenceMonth,
+                unitId: req.query.unitId
+            }
+        }
+
+        response = await this.useCase.execute(dto)
+
         return this.ok(response)
     }
 }
