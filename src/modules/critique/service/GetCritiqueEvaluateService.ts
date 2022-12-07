@@ -37,55 +37,64 @@ export default class GetCritiqueEvaluateService {
         const result = [
             {
                 id: 1,
-                name: 'Energia compensada deveria existir',
+                errorMessage: 'Energia compensada deveria existir',
+                successMessage: 'Energia compensada existe',
                 law: 'RN Nº 687 24/11/2015 - Artigo 7º - inciso II',
                 status: this.evalCritique1(aggregate)
             },
             {
                 id: 2,
-                name: 'Energia compensada com valor maior que energia consumida',
+                errorMessage: 'Energia compensada com valor maior que energia consumida',
+                successMessage: 'Energia compensada com valor menor ou igual à energia consumida',
                 law: 'RN Nº 687 24/11/2015 - Artigo 2º - inciso III',
                 status: this.evalCritique2(aggregate)
             },
             {
                 id: 3,
-                name: 'Há energia compensada, porém consumo é zero',
+                errorMessage: 'Há energia compensada, porém consumo é zero',
+                successMessage: 'Há energia compensada, porém consumo é maior que zero',
                 law: 'Não há exatamente uma lei que rege este tópico, porém trata-se de um erro, uma vez que compensa-se apenas o que se consome. A energia injetada na rede refere-se como “injetada” ou até rateada',
                 status: this.evalCritique3(aggregate)
             },
             {
                 id: 4,
-                name: 'Injeção maior que consumo, porém o saldo de créditos não aumentou',
+                errorMessage: 'Injeção maior que consumo, porém o saldo de créditos não aumentou',
+                successMessage: 'Injeção maior que consumo e o saldo de créditos aumentou',
                 law: 'RN Nº 687 24/11/2015 - Artigo 7º - incisos IX, X, XII',
                 status: this.evalCritique4(aggregate)
             },
             {
                 id: 5,
-                name: 'Injeção menor que consumo, porém saldo de créditos não diminuiu ou era zero',
+                errorMessage: 'Injeção menor que consumo, porém saldo de créditos não diminuiu',
+                successMessage: 'Injeção menor que consumo e saldo de créditos diminuiu ou era zero',
                 law: 'RN Nº 687 24/11/2015 - Artigo 7º - incisos IX, X, XII',
                 status: this.evalCritique5(aggregate)
             },
             {
                 id: 6,
-                name: 'Energia injetada diverge de delta saldo menos energia compensada em mais de 5% ou 100 kWh',
+                errorMessage: 'Energia injetada diverge de delta saldo menos energia compensada em mais de 5% ou 100 kWh',
+                successMessage: 'Energia injetada não diverge de delta saldo menos energia compensada em mais de 5% ou 100 kWh',
                 law: 'RN Nº 687 24/11/2015 - Artigo 7º - inciso III, IV',
                 status: this.evalCritique6(aggregate)
             },
             {
                 id: 7,
-                name: 'Saldo após compensação incorreto',
+                errorMessage: 'Saldo após compensação incorreto',
+                successMessage: 'Saldo após compensação correto',
                 law: 'RN Nº 687 24/11/2015 - Artigo 7º - inciso III',
                 status: this.evalCritique7(aggregate)
             },
             {
                 id: 8,
-                name: 'Energia consumida parcialmente compensada',
+                errorMessage: 'Energia consumida parcialmente compensada',
+                successMessage: 'Energia consumida devidamente compensada',
                 law: 'RN Nº 687 24/11/2015 - Artigo 7º - inciso III',
                 status: this.evalCritique8(aggregate)
             },
             {
                 id: 9,
-                name: 'Energia consumida não compensada, apesar de injeção ou créditos',
+                errorMessage: 'Energia consumida não compensada, apesar de injeção ou créditos',
+                successMessage: 'Energia consumida compensada com injeção e/ou créditos',
                 law: 'RN Nº 687 24/11/2015 - Artigo 7º - inciso III',
                 status: this.evalCritique9(aggregate)
             },
