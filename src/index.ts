@@ -11,9 +11,16 @@ const corsOptions = {
     optionSuccessStatus: 200
 }
 
+const corsOptionsLocal = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    optionSuccessStatus: 200
+}
+
 // middlewares
 app.use(express.json({ limit: '10MB'}))
 app.use(cors(corsOptions))
+// app.use(cors(corsOptionsLocal))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(router)
