@@ -34,7 +34,7 @@ export default class GetInvoiceByIdUseCase implements UseCase<any, any> {
     getInjectedTotal(itens_fatura: any) {
         let injected = 0
         itens_fatura.forEach((item: any) => {
-            if([37, 38].includes(item.id_tipo_item_fatura)) injected += parseFloat(item.valor.replace('.', '').replace(',', '.'))
+            if([37, 38].includes(item.id_tipo_item_fatura)) injected += parseFloat(item.valor)
         })
         return parseFloat(injected.toFixed(2))
     }
@@ -42,7 +42,7 @@ export default class GetInvoiceByIdUseCase implements UseCase<any, any> {
     getConsumedTotal(itens_fatura: any) {
         let consumed = 0
         itens_fatura.forEach((item: any) => {
-            if([21, 87].includes(item.id_tipo_item_fatura)) consumed += parseFloat(item.valor.replace('.', '').replace(',', '.'))
+            if([21, 87].includes(item.id_tipo_item_fatura)) consumed += parseFloat(item.valor)
         })
         return parseFloat(consumed.toFixed(2))
     }
