@@ -261,7 +261,7 @@ export default class GetCritiqueEvaluateService {
         this.results[4].expected = `Menor que ${previousCredits}`
         this.results[4].calculed = credits
 
-        if(previousCredits <= credits || previousCredits === 0) {
+        if(previousCredits <= credits && previousCredits !== 0) {
             this.results[4].status = this.status.divergent
             return
         }
